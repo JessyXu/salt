@@ -1,0 +1,51 @@
+I'm new to salt and I want to install my own ipk mytest.ipk to the minion, and I used the following salt command: 
+
+salt * pkg.install sources='[{"testing": "salt: //testing.ipk"}]'
+
+Then I got an error as follows:
+VMware7-1--SN-VMware-56_4d_d5_0f_97_d0_1f_28-d5_22_8e_21_9e_ab_27_b8:
+    The minion function caused an exception: Traceback (most recent call last):
+      File "/usr/lib/python2.7/site-packages/salt/minion.py", line 1142, in _thread_return
+        return_data = func(*args, **kwargs)
+      File "/usr/lib/python2.7/site-packages/salt/modules/opkg.py", line 222, in install
+        name, pkgs, sources, **kwargs
+      File "/usr/lib/python2.7/site-packages/salt/modules/pkg_resource.py", line 131, in parse_targets
+        sources = pack_sources(sources, normalize=normalize)
+      File "/usr/lib/python2.7/site-packages/salt/modules/pkg_resource.py", line 73, in pack_sources
+        sources = yaml.safe_load(sources)
+      File "/usr/lib/python2.7/site-packages/yaml/__init__.py", line 93, in safe_load
+        return load(stream, SafeLoader)
+      File "/usr/lib/python2.7/site-packages/yaml/__init__.py", line 71, in load
+        return loader.get_single_data()
+      File "/usr/lib/python2.7/site-packages/yaml/constructor.py", line 37, in get_single_data
+        node = self.get_single_node()
+      File "/usr/lib/python2.7/site-packages/yaml/composer.py", line 35, in get_single_node
+        if not self.check_event(StreamEndEvent):
+      File "/usr/lib/python2.7/site-packages/yaml/parser.py", line 98, in check_event
+        self.current_event = self.state()
+      File "/usr/lib/python2.7/site-packages/yaml/parser.py", line 143, in parse_implicit_document_start
+        StreamEndToken):
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 116, in check_token
+        self.fetch_more_tokens()
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 244, in fetch_more_tokens
+        return self.fetch_single()
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 653, in fetch_single
+        self.fetch_flow_scalar(style='\'')
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 667, in fetch_flow_scalar
+        self.tokens.append(self.scan_flow_scalar(style))
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 1158, in scan_flow_scalar
+        chunks.extend(self.scan_flow_scalar_spaces(double, start_mark))
+      File "/usr/lib/python2.7/site-packages/yaml/scanner.py", line 1245, in scan_flow_scalar_spaces
+        "found unexpected end of stream", self.get_mark())
+    ScannerError: while scanning a quoted scalar
+      in "<string>", line 1, column 1:
+        '[{testing:
+        ^
+    found unexpected end of stream
+      in "<string>", line 1, column 12:
+        '[{testing:
+                   ^
+                   
+  I have no idea about why there is this error, do any guys know about this?
+  
+  Thanks.
